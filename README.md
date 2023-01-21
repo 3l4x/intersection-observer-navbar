@@ -1,6 +1,6 @@
 # Intersection Observer Navbar
 
-This project is an example of how to use the Intersection Observer API to change the style of a navbar as the user scrolls through different sections of a webpage.
+This project I made in 2021 to practise the Intersection Observer API. It changes the style of a navbar as the user scrolls through different sections of a webpage. I refactored and changed the code a bit on 1/21/2023.
 
 
 ## Features

@@ -53,13 +53,15 @@ header a{
     transition: background-color 500ms ease-out;
 }
 
+
 header li{
     background-color: slateblue;
     transition: width 1s ease-in;
 }
 
-header li .li-focused{
-    width: 100%;
+header .li-focused{
+    box-shadow: inset 0 -5px 0px #00ba92;
+    transition: all 0.2s ease-in-out;
 }
 
 /* SECTION */

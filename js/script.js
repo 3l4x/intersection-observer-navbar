@@ -1,16 +1,7 @@
 const sections = document.querySelectorAll('section');
-const sectionNames = [];
-sections.forEach(section=>sectionNames.push(section.id));
-
+const sectionNames = [...sections].map(section => section.id);
 let lastSeen = 0;   //index of last seen section
-
-const options = {
-    threshold : [0.1 , 0.8]
-}
-
-
-const observer = new IntersectionObserver(headerHandler,options);
-
+const observer = new IntersectionObserver(handleIntersection,{threshold : [0.1 , 0.8]});
 sections.forEach(section=>{
     observer.observe(section);
 })
@@ -19,20 +10,16 @@ sections.forEach(section=>{
 
 const header = document.querySelector('header');
 
-function headerHandler(entries)
+function handleIntersection(entries)
 {
     entries.filter((entry) => entry.isIntersecting).forEach(entry=>{
-
-        if(entry.isIntersecting)
-        {
-            const sectionNameCurrent = entry.target.id;
-            const indexCurrent = sectionNames.findIndex(element => element === sectionNameCurrent);
+            const indexCurrent = sectionNames.findIndex(element => element ===  entry.target.id);
             if(indexCurrent > lastSeen) //scrolling down        min 0.8 threshold to change
             {
                 if(entry.intersectionRatio >= 0.8)
                 {
                     lastSeen = indexCurrent;
-                    changeHeaderStyle(entry.target);
+                    updateNavStyle(entry.target);
                 }
             }
             else if(indexCurrent < lastSeen)//scrolling up       min 0.1 threshold
@@ -40,18 +27,15 @@ function headerHandler(entries)
                 if(entry.intersectionRatio >= 0.1)
                 {
                     lastSeen = indexCurrent;
-                    changeHeaderStyle(entry.target);
+                    updateNavStyle(entry.target);
                 }
             }
-
-        }
     })
 }
 
 
-function changeHeaderStyle(section)
+function updateNavStyle(section)
 {
-    console.log(lastSeen);
     //0,2 == white
     //1,3 == black
     if(lastSeen % 2)    //every odd section is black -> needs inverse header
@@ -63,10 +47,10 @@ function changeHeaderStyle(section)
         //if(...contains()) = > remove
         header.classList.remove('header-inverse');
     }
-    toggleHeaderFocus(sectionNames[lastSeen]);
+    toggleNavFocus(sectionNames[lastSeen]);
 }
 
-function toggleHeaderFocus(sectionName)
+function toggleNavFocus(sectionName)
 {
     document.querySelector('.li-focused').classList.remove('li-focused');
     document.querySelector(`#${sectionName}-li`).classList.add('li-focused');
