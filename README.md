@@ -1,7 +1,9 @@
+
 # Intersection Observer Navbar
 
 This project I made in 2021 to practise the Intersection Observer API. It changes the style of a navbar as the user scrolls through different sections of a webpage. I refactored and changed the code a bit on 1/21/2023.
 
+View live demo [here](https://3l4x.github.io/intersection-observer-navbar/)
 
 ## Features
 
